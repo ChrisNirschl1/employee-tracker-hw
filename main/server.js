@@ -30,7 +30,7 @@ const db = mysql.createConnection(
           }
       ]).then(data =>{
           if(data.starter === 'view all departments'){
-              db.query('SELECT * FROM department', (err, data) =>{
+              db.query('SELECT * FROM department;', (err, data) =>{
               if (err){
                   throw err;
               } else{
@@ -40,7 +40,7 @@ const db = mysql.createConnection(
               }
             });
           } else if (data.starter === 'view all roles'){
-            db.query('SELECT * FROM role', (err, data) =>{
+            db.query('SELECT * FROM role;', (err, data) =>{
                 if (err){
                     throw err;
                 } else {
@@ -50,7 +50,7 @@ const db = mysql.createConnection(
 
             });
           }else if (data.starter === 'view all employees'){
-            db.query('SELECT * FROM employee', (err, data) =>{
+            db.query('SELECT * FROM employee;', (err, data) =>{
                 if (err){
                     throw err;
                 } else {
@@ -66,15 +66,74 @@ const db = mysql.createConnection(
                 type: "iput",
                 message: "New department?"
                 },
-            ]).then(({name}) =>{
-                db.query('INSERT INTO department VALUES (?)'), name, (err,data) =>{
+            ]).then((answer) =>{
+                db.query('INSERT INTO department VALUES (?,?);', [null, answer.name], (err,data) =>{
                     if(err){
                         throw err;
                     } else {
                         console.table("All Departments", data);
                         start();
                     };
-                };
+                });
+            });
+        }else if (data.starter === 'add a role'){
+            inquirer.prompt([
+                {
+                name: "title",
+                type: "iput",
+                message: "New role title?"
+                },
+                {
+                    name: "salary",
+                    type: "input",
+                    message: "salary for role?"
+                },
+                {
+                    name: "departmentID",
+                    type: "input",
+                    message: "Department ID for role"
+                },
+            ]).then((answers) =>{
+                db.query('INSERT INTO department VALUES (?,?,?,?);', [null, answers.title, answers.salary, answers.departmentID], (err,data) =>{
+                    if(err){
+                        throw err;
+                    } else {
+                        console.table("All Roles", data);
+                        start();
+                    };
+                });
+            });
+        }else if (data.starter === 'add an employee'){
+            inquirer.prompt([
+                {
+                name: "firstname",
+                type: "iput",
+                message: "Employee first name?"
+                },
+                {
+                    name: "lastname",
+                    type: "iput",
+                    message: "Employee last name?"
+                    },
+                    {
+                        name: "roleid",
+                        type: "iput",
+                        message: "Employee role id?"
+                        },
+                        {
+                            name: "managerid",
+                            type: "iput",
+                            message: "Employee manager id?"
+                            },
+            ]).then((results) =>{
+                db.query('INSERT INTO employee VALUES (?,?,?,?,?)', [null, results.firstname, results.lastname, results.roleid, results.managerid], (err,data) =>{
+                    if(err){
+                        throw err;
+                    } else {
+                        console.table("All Employees", data);
+                        start();
+                    };
+                });
             });
         }
       })
@@ -83,11 +142,9 @@ const db = mysql.createConnection(
   }
 
   start();
+  
 
-//   viewDepartments= () =>{
-//       db.query ('SELECT * FROM department' );
-//       console.table( db.query ('SELECT * FROM department' ));
-//   }
+
 
 //   app.listen( PORT,()=>{
 //     console.log("listenin to port "+ PORT)
