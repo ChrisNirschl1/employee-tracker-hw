@@ -29,12 +29,24 @@ const db = mysql.createConnection(
           }
       ]).then(data =>{
           if(data.choice === 'view all departments'){
+              db.query('SELECT * FROM department', (err, data) =>{
               if (err){
                   throw err;
               } else{
+                  viewDepartments();
                   console.table("All departments", data);
 
               }
+            });
+          } else if (data.choice === 'view all roles'){
+            db.query('SELECT * FROM roles', (err, data) =>{
+                if (err){
+                    throw err;
+                } else {
+                    console.table("All Roles", data)
+                }
+
+            });
           }
       })
 
@@ -43,10 +55,10 @@ const db = mysql.createConnection(
 
   start();
 
-  viewDepartments= () =>{
-      db.query ('SELECT * FROM department' );
-      console.table( db.query ('SELECT * FROM department' ));
-  }
+//   viewDepartments= () =>{
+//       db.query ('SELECT * FROM department' );
+//       console.table( db.query ('SELECT * FROM department' ));
+//   }
 
 //   app.listen( PORT,()=>{
 //     console.log("listenin to port "+ PORT)
