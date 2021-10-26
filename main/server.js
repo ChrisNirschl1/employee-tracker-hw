@@ -99,7 +99,7 @@ const db = mysql.createConnection(
                     message: "Department ID for role"
                 },
             ]).then((answers) =>{
-                db.query('INSERT INTO department VALUES (?,?,?,?);', [null, answers.title, answers.salary, answers.departmentID], (err,data) =>{
+                db.query('INSERT INTO role VALUES (?,?,?,?);', [null, answers.title, answers.salary, answers.departmentID], (err,data) =>{
                     if(err){
                         throw err;
                     } else {
