@@ -1,6 +1,44 @@
 # employee-tracker-hw
 # 12 SQL: Employee Tracker
 
+Project Title: 
+Employee database
+
+
+ ## Description
+ 
+ Built a command line interface to take in employee data and save in a database
+   
+ ## Table of Contents
+ * [Installation](#installation)
+ * [Usage](#usage)
+ * [Contributing](#contributing)
+ * [Credits](#credits)
+ * [License](#license)
+ 
+
+
+   ## Installation
+   You need inquirer, mysql2 and console.table installed
+    
+   ## Usage
+
+   Enter, track and update employees and who they report to.
+
+
+    
+       
+   ## Credits
+   Christian Nirschl
+    
+   ## License
+
+   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+    
+   ---
+
+   Github Portfolio: ChrisNirschl1
+
 ## Your Task
 
 Developers frequently have to create interfaces that allow non-developers to easily view and interact with information stored in databases. These interfaces are called **content management systems (CMS)**. Your assignment this week is to build a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.

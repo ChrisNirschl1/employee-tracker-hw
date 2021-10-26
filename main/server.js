@@ -19,7 +19,7 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the workplace_db database.`)
   );
-
+//start the prompt, became a giant if statment 
   start= () =>{
       inquirer.prompt([
           {
@@ -29,6 +29,7 @@ const db = mysql.createConnection(
               choices: ['view all departments', 'view all roles', 'view all employees','add a department', 'add a role', 'add an employee', 'update an employee role', 'Done']
           }
       ]).then(data =>{
+          //view the departments
           if(data.starter === 'view all departments'){
               db.query('SELECT * FROM department;', (err, data) =>{
               if (err){
@@ -39,6 +40,7 @@ const db = mysql.createConnection(
 
               }
             });
+            //view the roles
           } else if (data.starter === 'view all roles'){
             db.query('SELECT * FROM role;', (err, data) =>{
                 if (err){
@@ -49,6 +51,7 @@ const db = mysql.createConnection(
                 }
 
             });
+            //view the employees
           }else if (data.starter === 'view all employees'){
             db.query('SELECT * FROM employee;', (err, data) =>{
                 if (err){
@@ -59,6 +62,7 @@ const db = mysql.createConnection(
                 }
 
             });
+            //add a department
         } else if (data.starter === 'add a department'){
             inquirer.prompt([
                 {
@@ -76,6 +80,7 @@ const db = mysql.createConnection(
                     };
                 });
             });
+            //add a new role
         }else if (data.starter === 'add a role'){
             inquirer.prompt([
                 {
@@ -103,6 +108,7 @@ const db = mysql.createConnection(
                     };
                 });
             });
+            //add an employee
         }else if (data.starter === 'add an employee'){
             inquirer.prompt([
                 {
@@ -142,7 +148,7 @@ const db = mysql.createConnection(
   }
 
   start();
-  
+
 
 
 
